@@ -20,7 +20,7 @@ export class UploadController {
 
   @Post('multiple')
   @UseInterceptors(FilesInterceptor('files'))
-  uploadFiles(@UploadedFiles() files: Express.Multer.File[]) {
-    console.log(files);
+  async uploadFiles(@UploadedFiles() files: Express.Multer.File[]) {
+    return await this.uploadService.uploadFiles(files);
   }
 }

@@ -47,4 +47,39 @@ export class UploadService {
       throw error;
     }
   }
+
+  async uploadFiles(files: Express.Multer.File[]): Promise<
+    {
+      fileName: string;
+      originalName: string;
+      size: number;
+    }[]
+  > {
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const filename = file.originalname;
+
+        await this.minioClient.putObject(
+          this.bucketName,
+          filename,
+          file.buffer,
+          file.size,
+          {
+            'Content-Type': file.mimetype,
+          },
+        );
+
+        return {
+          fileName: filename,
+          originalName: file.originalname,
+          size: file.size,
+        };
+      });
+
+      return await Promise.all(uploadPromises);
+    } catch (error: any) {
+      this.logger.error('Error uploading files:', error);
+      throw error;
+    }
+  }
 }
