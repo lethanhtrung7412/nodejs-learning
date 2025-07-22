@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { createZitadelAuth, type ZitadelConfig } from "@zitadel/react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Login from "./components/Login";
+import Callback from "./components/Callback";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const config: ZitadelConfig = {
+    authority: "",
+    client_id: "",
+  };
+
+  const zitadel = createZitadelAuth(config);
+
+  function login() {
+    zitadel.authorize();
+  }
+
+  function signout() {
+    zitadel.signout();
+  }
+
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    zitadel.userManager.getUser().then((user) => {
+      if (user) {
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+      }
+    });
+  }, [zitadel]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <header className="App-header">
+        {/* <img className="App-logo" alt="logo" /> */}
+        <p>Welcome to ZITADEL React</p>
+
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Login authenticated={authenticated} handleLogin={login} />
+              }
+            />
+            <Route
+              path="/callback"
+              element={
+                <Callback
+                  authenticated={authenticated}
+                  setAuth={setAuthenticated}
+                  handleLogout={signout}
+                  userManager={zitadel.userManager}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </header>
+    </div>
+  );
 }
 
-export default App
+export default App;

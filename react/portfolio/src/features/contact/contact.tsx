@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 
 export function Contact() {
   return (
@@ -37,18 +37,13 @@ export function Contact() {
                 <h3 className="text-lg font-semibold mb-2">Connect</h3>
                 <div className="flex gap-3">
                   <Button asChild size="icon" variant="outline">
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <a href="https://github.com/lethanhtrung7412" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                       <Github className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button asChild size="icon" variant="outline">
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/lethanhtrung712/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                       <Linkedin className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild size="icon" variant="outline">
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                      <Twitter className="h-4 w-4" />
                     </a>
                   </Button>
                 </div>
