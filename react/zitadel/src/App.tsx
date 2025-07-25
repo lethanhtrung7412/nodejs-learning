@@ -8,8 +8,10 @@ import Callback from "./components/Callback";
 
 function App() {
   const config: ZitadelConfig = {
-    authority: "",
-    client_id: "",
+    authority: import.meta.env.VITE_ZITADEL_URL,
+    client_id: import.meta.env.VITE_ZITADEL_ID,
+    redirect_uri:import.meta.env.VITE_REDIRECT_URI,
+    post_logout_redirect_uri: import.meta.env.VITE_POST_LOGOUT_REDIRECT_URI 
   };
 
   const zitadel = createZitadelAuth(config);
