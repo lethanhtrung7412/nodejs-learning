@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './user/entities/user.entity';
+import { ZitadelAuthModule } from '@auth/zitadel-auth';
 
 @Module({
   imports: [
@@ -28,9 +29,28 @@ import { User } from './user/entities/user.entity';
         };
       },
     }),
+    ZitadelAuthModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        return {
+          authority: configService.getOrThrow('ZITADEL_AUTHORITY'),
+          authorization: {
+            type: 'jwt-profile',
+            profile: {
+              type: 'application',
+              keyId: configService.getOrThrow('ZITADEL_KEY_ID'),
+              key: configService.getOrThrow('ZITADEL_KEY'),
+              appId: configService.getOrThrow('ZITADEL_APP_ID'),
+              clientId: configService.getOrThrow('ZITADEL_CLIENT_ID'),
+            },
+          },
+        };
+      },
+    }),
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [ConfigService, AppService],
 })
 export class AppModule {}

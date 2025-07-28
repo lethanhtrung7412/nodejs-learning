@@ -3,6 +3,18 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "zitadel-auth": {
+      "type": "library",
+      "root": "libs/zitadel-auth",
+      "entryFile": "index",
+      "sourceRoot": "libs/zitadel-auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/zitadel-auth/tsconfig.lib.json"
+      }
+    }
   }
 }

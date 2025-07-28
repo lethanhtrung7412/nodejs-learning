@@ -17,6 +17,9 @@ export class User {
   @Column({ name: 'zitadel_id', unique: true })
   zitadelId: string;
 
+  @Column()
+  fullName: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
