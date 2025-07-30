@@ -1,7 +1,7 @@
 // src/config/zitadel.config.ts
 export const zitadelConfig = {
   // URL của Zitadel instance
-  issuer: 'https://yggdrasil-8hziuy.us1.zitadel.cloud/',
+  issuer: 'https://yggdrasil-8hziuy.us1.zitadel.cloud',
 
   // Project ID (audience để validate token)
   audience: '330553143001717623',
