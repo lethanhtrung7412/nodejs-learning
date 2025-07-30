@@ -1,10 +1,11 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from './current-users.decorator';
+import { IntrospectionAuthGuard } from 'src/auth/guards/introspection.guard';
 
 @Controller('users')
 export class UsersController {
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(IntrospectionAuthGuard)
   @Get('profile')
   getProfile(@CurrentUser() user: any) {
     return {

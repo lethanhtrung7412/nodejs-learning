@@ -14,7 +14,7 @@ export const zitadelConfig = {
     'https://yggdrasil-8hziuy.us1.zitadel.cloud/oauth/v2/introspect',
 
   // Client credentials (cần tạo service account trong Zitadel)
-  clientId: 'machine',
+  clientId: '331124784744215838',
   clientSecret:
-    'rhdIT3rdA8upvqU0BKWfrvkVMkBTXZf83GgEPfjeGSUhDo5giZiMJAWepJWKhXqi',
+    'Kidt3Dv7ybtknj3OZYqFP12ZkSmRIe57HZKJl2Xu85rr56UiBMgRgtj8fjtZ2TNy',
 };
