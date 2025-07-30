@@ -11,6 +11,8 @@ function App() {
   const config: ZitadelConfig = {
     authority: "https://yggdrasil-8hziuy.us1.zitadel.cloud/",
     client_id: "329976057723727912",
+    redirect_uri: "http://localhost:5173/callback",
+    post_logout_redirect_uri: "http://localhost:5173/"
   };
 
   const zitadel = createZitadelAuth(config);
